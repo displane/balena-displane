@@ -1,0 +1,29 @@
+name: balena-displane
+type: sw.application
+description: >-
+  Turn your device into a powerful Digital Signage display, with central management, multi-site views and more! Learn more at https://displane.cloud
+post-provisioning: >-
+  ## Usage instructions
+  
+  Once you have setup your device with Displane, you will be presented with an Adoption ID, 
+  which you can use to adopt the player into your Displane org.
+
+  You can also set the environment variable "DISPLANE_ORG_ID" to automatically enroll the device into your organization
+
+assets:
+  repository:
+    type: blob.asset
+    data:
+      url: 'https://github.com/displane/balena-displane'
+  logo:
+    type: blob.asset
+    data:
+      url: https://raw.githubusercontent.com/displane/balena-displane/master/logo.png
+data:
+  applicationEnvironmentVariables:
+    - DISPLANE_ORG_ID: ""
+  applicationConfigVariables:
+    - BALENA_HOST_CONFIG_gpu_mem: 256
+    - BALENA_HOST_CONFIG_gpu_mem_512: 128
+    - BALENA_HOST_CONFIG_dtoverlay: vc4-fkms-v3d
+version: 0.0.1

@@ -1,0 +1,37 @@
+# syntax=docker/dockerfile:1.2
+FROM balenalib/%%BALENA_ARCH%%-node:14.17-bullseye-run as runtime
+
+RUN \
+	apt update \
+	&& apt install -y \
+		libasound2 \
+		libgdk-pixbuf2.0-0 \
+		libglib2.0-0 \
+		libgtk-3-0 \
+		libnss3 \
+		libx11-xcb1 \
+		libxss1 \
+		libxtst6 \
+		onboard \
+		dconf-cli \
+		metacity \
+		xserver-xorg \
+		xinit \
+		x11-xserver-utils \
+		fonts-symbola \
+	&& rm -rf /var/lib/apt/lists/*
+
+COPY .xserverrc /root/.xserverrc
+COPY .xinitrc /root/.xinitrc
+
+ENV DISPLAY=:0
+ENV X_ADDITIONAL_PARAMETERS='-nocursor'
+ENV DBUS_SESSION_BUS_ADDRESS="unix:path=/tmp/dbus-session-bus"
+ENV DBUS_SYSTEM_BUS_ADDRESS="unix:path=/host/run/dbus/system_bus_socket"
+
+WORKDIR /usr/src/app
+
+COPY start.sh /usr/local/bin
+RUN git clone https://github.com/displane/client-oss.git . && npm i
+
+ENTRYPOINT ["/bin/bash", "/usr/local/bin/start.sh"]
