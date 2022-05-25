@@ -19,6 +19,9 @@ RUN \
 		xinit \
 		x11-xserver-utils \
 		fonts-symbola \
+		git \
+		psmisc \
+		curl \
 	&& rm -rf /var/lib/apt/lists/*
 
 COPY .xserverrc /root/.xserverrc
@@ -32,6 +35,9 @@ ENV DBUS_SYSTEM_BUS_ADDRESS="unix:path=/host/run/dbus/system_bus_socket"
 WORKDIR /usr/src/app
 
 COPY start.sh /usr/local/bin
-RUN git clone https://github.com/displane/client-oss.git . && npm i
+COPY watchdog.sh /usr/local/bin
+COPY client-oss/package.json .
+RUN npm i
+ADD client-oss .
 
 ENTRYPOINT ["/bin/bash", "/usr/local/bin/start.sh"]

@@ -14,4 +14,5 @@ fi
 
 metacity &
 dbus-daemon --fork --session --address $DBUS_SESSION_BUS_ADDRESS
-/usr/src/app/node_modules/.bin/electron $REMOTE_DEBUG --no-sandbox /usr/src/app
+/usr/local/bin/watchdog.sh
+#/usr/src/app/node_modules/.bin/electron $REMOTE_DEBUG --no-sandbox /usr/src/app
