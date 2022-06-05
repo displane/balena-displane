@@ -12,7 +12,8 @@ if [ -n "$BALENAELECTRONJS_REMOTE_DEBUGGING_PORT" ]; then
 	simpleproxy -d -L $BALENAELECTRONJS_REMOTE_DEBUGGING_PORT -R 127.0.0.1:$LOCAL_PORT
 fi
 
-metacity &
+metacity --no-composite &
+picom --config /etc/picom.conf &
 dbus-daemon --fork --session --address $DBUS_SESSION_BUS_ADDRESS
 /usr/local/bin/watchdog.sh
 #/usr/src/app/node_modules/.bin/electron $REMOTE_DEBUG --no-sandbox /usr/src/app

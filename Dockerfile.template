@@ -12,9 +12,9 @@ RUN \
 		libx11-xcb1 \
 		libxss1 \
 		libxtst6 \
-		onboard \
 		dconf-cli \
 		metacity \
+		picom \
 		xserver-xorg \
 		xinit \
 		x11-xserver-utils \
@@ -26,6 +26,7 @@ RUN \
 
 COPY .xserverrc /root/.xserverrc
 COPY .xinitrc /root/.xinitrc
+COPY picom.conf /etc/picom.conf
 
 ENV DISPLAY=:0
 ENV X_ADDITIONAL_PARAMETERS='-nocursor'
