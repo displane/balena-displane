@@ -23,6 +23,7 @@ data:
   applicationConfigVariables:
     - BALENA_HOST_CONFIG_gpu_mem: 256
     - BALENA_HOST_CONFIG_gpu_mem_512: 128
+    - BALENA_HOST_CONFIG_disable_overscan: 1
   defaultDeviceType: intel-nuc
   supportedDeviceTypes:
     - raspberry-pi
