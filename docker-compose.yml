@@ -18,6 +18,7 @@ services:
       - "displane-config:/config"
     labels:
         io.balena.features.dbus: '1'
+    shm_size: 128mb
 
 volumes:
     displane-config:
